@@ -28,6 +28,8 @@ public class CartActivity extends AppCompatActivity {
     Button btnPay,btnContinueBuy;
     android.support.v7.widget.Toolbar toolbarcart;
     CartAdapter cartAdapter;
+    static long totalcash = 0;
+    static String subtotal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,7 @@ public class CartActivity extends AppCompatActivity {
         lvcart.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder= new AlertDialog.Builder(CartActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
                 builder.setTitle("Ban co muon xoa san pham nay");
                 builder.setMessage("Ban co chac muon xoa san pham nay");
                 builder.setPositiveButton("Co", new DialogInterface.OnClickListener() {
@@ -109,13 +111,15 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public static void EvenUtils(){
-        long totalcash = 0;
+        totalcash = 0;
         for(int i=0;i<MainActivity.arrCart.size();i++)
         {
             totalcash += MainActivity.arrCart.get(i).getPrice();
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         txtTotalCash.setText(decimalFormat.format(totalcash)+"D");
+        CustomerInfo.subtotal = totalcash;
+        subtotal = Long.toString(totalcash);
     }
     private void CheckData() {
         if(MainActivity.arrCart.size()<=0)

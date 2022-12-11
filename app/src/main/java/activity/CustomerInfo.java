@@ -31,6 +31,7 @@ public class CustomerInfo extends AppCompatActivity {
 
     EditText edtCustomerName,edtEmail,edtPhoneNumber;
     Button btnConfirm,btnBack;
+    static long subtotal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +98,7 @@ public class CustomerInfo extends AppCompatActivity {
                                                 jsonObject.put("ProductName",MainActivity.arrCart.get(i).getProductName());
                                                 jsonObject.put("Price",MainActivity.arrCart.get(i).getPrice());
                                                 jsonObject.put("Number",MainActivity.arrCart.get(i).getProductNumber());
+                                                jsonObject.put("UserName",MainActivity.username);
 
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
@@ -105,6 +107,11 @@ public class CustomerInfo extends AppCompatActivity {
                                         }
                                         HashMap<String,String> hashMap = new HashMap<String, String>();
                                         hashMap.put("json",jsonArray.toString());
+                                        hashMap.put("OrderId",madonhang);
+                                        hashMap.put("CustumerName",Name);
+                                        hashMap.put("Subtotal",CartActivity.subtotal);
+                                        hashMap.put("User_Name",MainActivity.username);
+                                        hashMap.put("Adress",email);
                                         return hashMap;
                                     }
                                 };
